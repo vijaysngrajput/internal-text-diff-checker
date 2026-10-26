@@ -22,11 +22,8 @@ employee's machine.
 ## Features
 
 - Side-by-side **ORIGINAL** / **MODIFIED** panels (stacked on narrow screens)
-- **Compare** turns the two boxes into an aligned side-by-side view in place:
-  removed/changed lines are red in ORIGINAL, added/changed lines are green in
-  MODIFIED, with line numbers on both sides. **✎ edit** returns to the text
-  boxes with the content intact.
-- **Swap**, **Clear All**, plus per-panel *clear*
+- **Compare**, **Swap**, **Clear All**, plus per-panel *clear*
+- Line-by-line diff with line numbers for both sides
 - Optional **word-level** mode that highlights the exact changed words inside
   modified lines (ideal for long SQL statements and config lines)
 - Options: ignore leading/trailing whitespace · ignore blank lines · ignore
@@ -143,12 +140,11 @@ text_diff_checker/
 1. Open `index.html` in a browser (double-click it). Bookmark the resulting
    `file:///…/index.html` address for next time.
 2. Paste the original text on the left, the modified text on the right.
-3. Click **Compare** (or press `Ctrl/⌘ + Enter`). The two boxes become the
-   highlighted side-by-side comparison.
+3. Click **Compare** (or press `Ctrl/⌘ + Enter`).
 4. Optionally switch to **word-level** or enable the *ignore* options; the
    result updates immediately.
 5. **copy result** / **download .txt** if you need the report elsewhere.
-6. **✎ edit** to go back and change the text; **Clear All** when you are done.
+6. **Clear All** when you are done.
 
 The file can also be placed on an internal web server, intranet page or
 shared drive — it is a static file with no server-side requirements.
@@ -235,7 +231,7 @@ Measured in Chromium on a laptop-class machine:
 
 | Input | Compare | Compare + render |
 |---|---|---|
-| 20,000 lines, 200 changed | ~60 ms | ~5 s (rendering 20k table rows) |
+| 20,000 lines, 200 changed | ~60 ms | ~4 s (rendering 20k table rows) |
 | 20,000 lines, all different | ~90 ms | — |
 | 20,000 lines fully reordered | ~200 ms (edit-search budget hit, see below) | — |
 
