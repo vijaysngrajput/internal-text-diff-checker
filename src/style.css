@@ -1,0 +1,285 @@
+/* Private Diff — stylesheet
+ * Retro developer-utility look: muted neutrals, monospace, thin borders,
+ * square corners, compact spacing. No gradients, no animation.
+ * All rules are scoped under .pd-root so the same sheet works inside the
+ * userscript's shadow DOM overlay and in the standalone page. */
+
+.pd-root {
+  --pd-bg: #f4f3ee;
+  --pd-panel: #fbfaf6;
+  --pd-fg: #1f1f1f;
+  --pd-muted: #6b6a63;
+  --pd-border: #8a8a80;
+  --pd-border-soft: #c9c8c0;
+  --pd-btn: #e8e7e1;
+  --pd-btn-hover: #dcdbd4;
+  --pd-btn-active: #cfcec6;
+  --pd-accent: #2b2b2b;
+  --pd-add-bg: #e3f1dc;
+  --pd-add-fg: #1d4f1a;
+  --pd-add-mark: #b9dfae;
+  --pd-del-bg: #f7dedc;
+  --pd-del-fg: #7a1f1f;
+  --pd-del-mark: #efb8b4;
+  --pd-eq-bg: transparent;
+  --pd-lineno: #8d8c84;
+  --pd-note-bg: #fff8dc;
+  --pd-note-border: #d8c98a;
+  --pd-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono", monospace;
+  --pd-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  font-family: var(--pd-sans);
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--pd-fg);
+  background: var(--pd-bg);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.pd-root *, .pd-root *::before, .pd-root *::after { box-sizing: inherit; }
+
+@media (prefers-color-scheme: dark) {
+  .pd-root {
+    --pd-bg: #1e1e1c;
+    --pd-panel: #262624;
+    --pd-fg: #e4e3dd;
+    --pd-muted: #9a9990;
+    --pd-border: #5c5b55;
+    --pd-border-soft: #3e3d39;
+    --pd-btn: #33332f;
+    --pd-btn-hover: #3f3e39;
+    --pd-btn-active: #4a4943;
+    --pd-accent: #e4e3dd;
+    --pd-add-bg: #1f3a1d;
+    --pd-add-fg: #bfe8b4;
+    --pd-add-mark: #2f5f2b;
+    --pd-del-bg: #44201f;
+    --pd-del-fg: #f2b8b4;
+    --pd-del-mark: #6e2f2c;
+    --pd-lineno: #76756d;
+    --pd-note-bg: #3a3420;
+    --pd-note-border: #6b5f2e;
+  }
+}
+
+.pd-page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 14px 16px 32px;
+}
+
+/* ---- header ---------------------------------------------------------- */
+.pd-header {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  border-bottom: 1px solid var(--pd-border);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+.pd-title {
+  font-family: var(--pd-mono);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+.pd-subtitle { color: var(--pd-muted); margin: 0; }
+.pd-tag {
+  font-family: var(--pd-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  border: 1px solid var(--pd-border);
+  padding: 1px 6px;
+  color: var(--pd-muted);
+  margin-left: auto;
+  white-space: nowrap;
+}
+.pd-close {
+  margin-left: 8px;
+}
+
+/* ---- options --------------------------------------------------------- */
+.pd-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  align-items: center;
+  margin-bottom: 10px;
+  font-family: var(--pd-mono);
+  font-size: 12px;
+}
+.pd-options label { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap; }
+.pd-options input { margin: 0; accent-color: var(--pd-accent); }
+.pd-options .pd-group { display: inline-flex; gap: 12px; align-items: center; }
+.pd-options .pd-group-label { color: var(--pd-muted); }
+
+/* ---- editors --------------------------------------------------------- */
+.pd-editors {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 800px) {
+  .pd-editors { grid-template-columns: 1fr; }
+}
+.pd-panel {
+  border: 1px solid var(--pd-border);
+  background: var(--pd-panel);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.pd-panel-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--pd-border-soft);
+  font-family: var(--pd-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+.pd-panel-head .pd-count { color: var(--pd-muted); letter-spacing: 0; margin-left: auto; }
+.pd-panel textarea {
+  font-family: var(--pd-mono);
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--pd-fg);
+  background: transparent;
+  border: 0;
+  outline: none;
+  resize: vertical;
+  min-height: 320px;
+  height: 360px;
+  width: 100%;
+  padding: 8px;
+  margin: 0;
+  white-space: pre;
+  overflow: auto;
+  tab-size: 4;
+}
+.pd-panel textarea::placeholder { color: var(--pd-muted); opacity: 0.8; }
+.pd-panel textarea:focus { background: rgba(127, 127, 127, 0.05); }
+
+/* ---- buttons --------------------------------------------------------- */
+.pd-btn {
+  font-family: var(--pd-mono);
+  font-size: 12px;
+  color: var(--pd-fg);
+  background: var(--pd-btn);
+  border: 1px solid var(--pd-border);
+  border-radius: 0;
+  padding: 5px 12px;
+  cursor: pointer;
+  line-height: 1.2;
+}
+.pd-btn:hover { background: var(--pd-btn-hover); }
+.pd-btn:active { background: var(--pd-btn-active); }
+.pd-btn:focus-visible { outline: 2px solid var(--pd-accent); outline-offset: 1px; }
+.pd-btn-primary { font-weight: 700; }
+.pd-btn-small { font-size: 10px; padding: 1px 6px; letter-spacing: 0; }
+.pd-btn:disabled { opacity: 0.5; cursor: default; }
+
+.pd-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 10px 0;
+}
+.pd-actions .pd-hint { color: var(--pd-muted); font-family: var(--pd-mono); font-size: 11px; margin-left: auto; }
+.pd-actions .pd-result-tools {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  align-items: center;
+  margin-left: 10px;
+  padding-left: 12px;
+  border-left: 1px solid var(--pd-border-soft);
+  font-family: var(--pd-mono);
+  font-size: 11px;
+}
+.pd-actions .pd-result-tools[hidden] { display: none; }
+.pd-summary { display: inline-flex; gap: 10px; }
+.pd-summary .pd-s-add { color: var(--pd-add-fg); }
+.pd-summary .pd-s-del { color: var(--pd-del-fg); }
+.pd-summary .pd-s-eq  { color: var(--pd-muted); }
+
+/* ---- messages -------------------------------------------------------- */
+.pd-msg {
+  font-family: var(--pd-mono);
+  font-size: 12px;
+  border: 1px solid var(--pd-border-soft);
+  padding: 6px 10px;
+  margin: 8px 0;
+  background: var(--pd-panel);
+}
+.pd-msg-note { background: var(--pd-note-bg); border-color: var(--pd-note-border); }
+.pd-msg-ok { border-color: var(--pd-add-mark); background: var(--pd-add-bg); color: var(--pd-add-fg); }
+.pd-msg:empty { display: none; }
+
+/* ---- side-by-side view (replaces the editors after Compare) ---------- */
+.pd-view {
+  border: 1px solid var(--pd-border);
+  background: var(--pd-panel);
+}
+.pd-view[hidden], .pd-editors[hidden] { display: none; }
+.pd-view-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.pd-view-head .pd-panel-head:first-child { border-right: 1px solid var(--pd-border); }
+.pd-view-body {
+  overflow: auto;
+  min-height: 200px;
+  max-height: 75vh;
+  font-family: var(--pd-mono);
+  font-size: 12.5px;
+  line-height: 1.45;
+  outline: none;
+}
+.pd-view-body:focus-visible { box-shadow: inset 0 0 0 2px var(--pd-accent); }
+.pd-view-body table { border-collapse: collapse; width: 100%; table-layout: fixed; }
+.pd-view-body td { padding: 0 6px; vertical-align: top; white-space: pre; overflow: hidden; }
+.pd-view-body.pd-wrap td.pd-text { white-space: pre-wrap; word-break: break-all; }
+.pd-view-body td.pd-no {
+  color: var(--pd-lineno);
+  text-align: right;
+  user-select: none;
+  -webkit-user-select: none;
+  width: 3.2em;
+  border-right: 1px solid var(--pd-border-soft);
+}
+.pd-view-body td.pd-text { width: 50%; }
+/* vertical divider between the two halves */
+.pd-view-body td.pd-text:nth-child(2) { border-right: 1px solid var(--pd-border); }
+.pd-view-body td.pd-removed { background: var(--pd-del-bg); color: var(--pd-del-fg); }
+.pd-view-body td.pd-added   { background: var(--pd-add-bg); color: var(--pd-add-fg); }
+.pd-view-body td.pd-filler { background: var(--pd-bg); }
+.pd-view-body .pd-ins { background: var(--pd-add-mark); font-weight: 700; }
+.pd-view-body .pd-del { background: var(--pd-del-mark); font-weight: 700; }
+@media (max-width: 800px) {
+  /* On narrow screens the table scrolls horizontally rather than squashing. */
+  .pd-view-body table { min-width: 800px; }
+}
+
+.pd-footer {
+  margin-top: 18px;
+  color: var(--pd-muted);
+  font-size: 11px;
+  font-family: var(--pd-mono);
+  border-top: 1px solid var(--pd-border-soft);
+  padding-top: 6px;
+}
+
+/* ---- userscript overlay ---------------------------------------------- */
+.pd-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  overflow: auto;
+  background: var(--pd-bg);
+}

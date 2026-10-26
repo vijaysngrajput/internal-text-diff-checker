@@ -1,0 +1,21 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Node (no dependencies are expected, but just in case)
+node_modules/
+npm-debug.log*
+
+# Local artefacts
+*.log
+*.tmp
+/tmp/
+/dist/
+comparison.diff.txt
+
+# Secrets / local config
+.env
+.env.*

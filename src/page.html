@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<!-- Content Security Policy: the browser itself blocks any network request
+     this page might try to make (there are none) and any external script. -->
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="robots" content="noindex, nofollow">
+<title>Private Diff</title>
+<style>
+/*__STYLE__*/
+</style>
+</head>
+<body>
+<noscript><p style="font-family: monospace; padding: 16px">Private Diff needs JavaScript enabled. It runs entirely inside your browser.</p></noscript>
+<div id="private-diff"></div>
+<script>
+/*__ENGINE__*/
+</script>
+<script>
+/*__UI__*/
+</script>
+<script>
+(function () {
+  'use strict';
+  PrivateDiffUI.mount(document.getElementById('private-diff'));
+})();
+</script>
+</body>
+</html>
